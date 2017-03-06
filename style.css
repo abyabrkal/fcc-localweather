@@ -56,7 +56,6 @@ table {
 ************ ********  *****  ***********/
 
 
-
 *,
 *:after,
 *::before {
@@ -70,43 +69,141 @@ body {
 	background: dodgerblue;
 	width: 99%;
 	height: 100vh;
-	font-family: 'Cinzel', serif;
+	font-family: 'Open Sans', sans-serif;
+	color: white;
 }
 
-.container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	position: relative;
-	
+.margBtmXL {
+	margin-bottom: 40px;
 }
 
-input.searchbox {
-	background-color: transparent;
-	border: none;
-	border-bottom: solid 2px white;
-	width: 50%;
-	align-self: center;
+.margBtmL {
+	margin-bottom: 20px;
+}
+
+.margBtmS {
+	margin-bottom: 15px;
 }
 
 .weatherbox {
-	background-color:transparent;
-	box-shadow: 0px 0px 44px 2px rgba(100,100,100,0.45);
+  display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
 	position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   overflow: hidden;
 	margin: 0 auto;
+	
 	width: 80%;
+	height: 80%;
+	background-color:transparent;
+	box-shadow: 0px 0px 44px 2px rgba(100,100,100,0.45);
 	border-radius: 7px;
+	text-transform: uppercase;
 }
 
-.weatherbox,
-{
-	display: flex;
-	flex-direction: column;
+.wTemp {
+	font-size: 8em;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
 }
 
+/*********** TOGGLE SWITCH *************/
+/***************************************/
 
+.toggle {
+	position: absolute;
+	margin-left: -9999px;
+	visibility: hidden;
+}
 
+.toggle + label {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	outline: none;
+	user-select: none;
+}
 
+input.round + label {
+	padding: 2px;
+	width: 60px;
+	height: 30px;
+	background-color: #dddddd;
+	border-radius: 30px;
+} 
 
+input.round + label:before,
+input.round + label:after {
+	display: block;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	bottom: 1px;
+	content: "";
+}
+
+input.round + label:before {
+  right: 1px;
+  background-color: #f1f1f1;
+  border-radius: 30px;
+  transition: background 0.4s;
+}
+
+input.round + label:after {
+  width: 29px;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: margin 0.4s;
+}
+
+input.round:checked + label:before {
+  background-color: #8ce196;
+}
+
+input.round:checked + label:after {
+  margin-left: 30px;
+}
+
+/******** END OF TOGGLE SWITCH **********/
+/****************************************/
+
+.wDay {
+	font-size: 1em;
+	font-weight: 700;
+}
+
+.wCity {
+	font-size: 1.5em;
+	font-weight: 200;
+}
+
+.secondaryData {
+	font-size: 1em;
+	font-weight: 400;
+}
+
+span {
+	font-weight: 700;
+}
+
+.windSpeed {
+	display: inline-block;
+}
+
+.humidity {
+	display: inline-block;
+}
+
+.sunTime {
+	display: block;
+}
+
+.sunRise,
+.sunSet {
+	display:inline-block;
+}
