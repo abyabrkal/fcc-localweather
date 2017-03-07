@@ -56,6 +56,7 @@ table {
 ************ ********  *****  ***********/
 
 
+
 *,
 *:after,
 *::before {
@@ -66,7 +67,7 @@ table {
 
 
 body {
-	background: dodgerblue;
+	background: #1C2833;
 	width: 99%;
 	height: 100vh;
 	font-family: 'Open Sans', sans-serif;
@@ -74,15 +75,15 @@ body {
 }
 
 .margBtmXL {
-	margin-bottom: 40px;
+	margin-bottom: 50px;
 }
 
 .margBtmL {
-	margin-bottom: 20px;
+	margin-bottom: 35px;
 }
 
 .margBtmS {
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 }
 
 .weatherbox {
@@ -112,7 +113,6 @@ body {
 }
 
 /*********** TOGGLE SWITCH *************/
-/***************************************/
 
 .toggle {
 	position: absolute;
@@ -148,7 +148,7 @@ input.round + label:after {
 
 input.round + label:before {
   right: 1px;
-  background-color: #f1f1f1;
+  background-color: #1ABC9C;
   border-radius: 30px;
   transition: background 0.4s;
 }
@@ -162,7 +162,7 @@ input.round + label:after {
 }
 
 input.round:checked + label:before {
-  background-color: #8ce196;
+  background-color: #3498DB;
 }
 
 input.round:checked + label:after {
@@ -170,7 +170,6 @@ input.round:checked + label:after {
 }
 
 /******** END OF TOGGLE SWITCH **********/
-/****************************************/
 
 .wDay {
 	font-size: 1em;
@@ -178,7 +177,7 @@ input.round:checked + label:after {
 }
 
 .wCity {
-	font-size: 1.5em;
+	font-size: 1.7em;
 	font-weight: 200;
 }
 
@@ -189,10 +188,13 @@ input.round:checked + label:after {
 
 span {
 	font-weight: 700;
+	margin-right: 10px;
+	font-size: 1.5em;
 }
 
 .windSpeed {
 	display: inline-block;
+	margin-right: 30px;
 }
 
 .humidity {
@@ -203,7 +205,10 @@ span {
 	display: block;
 }
 
-.sunRise,
+.sunRise {
+	display: inline-block;
+	margin-right: 30px;
+}
 .sunSet {
 	display:inline-block;
 }
