@@ -9,4 +9,5 @@ https://www.freecodecamp.com/abyabrkal
 ### STATUS: [PENDING]
 *23 Mar 2017*
  - Cross Origin issue in JS
- - Weather data
+ - City missing
+ + All rem weather data ready
