@@ -3,106 +3,119 @@
 }, false);*/
 
 
+//Global variables
+var cTemp = "";
+var cityIP = "";
+var country = "";
+var countryISO2 = "";
+var dayType = "";
+var winSpd = "";
+var winDir = "";
+var humid = "";
+var sunRiseTime = "";
+var sunSetTime = "";
+var loc = ["Dubai", "AE"]
+
+
+//URL variables
+var baseURL = "http://api.openweathermap.org/data/2.5/weather?q=";
+var unitMTR = "&units=metric";
+var callBACK = "&callback=?";
+var apID = "&appid=49feecc2cd382186ed0d59d785a42457";
+var finalURL = "";
+
+
+
+
+
+// Get City and Country data from IP address
+function getLocation() {
+
+
+          $.get("https://ipinfo.io", function(response) {
+
+              console.log(response.city, response.country);
+              cityIP = response.city;
+              countryISO2 = response.country;
+
+          }, "jsonp");
+					console.log("CITY  INSIDE - " + response.city);
+					console.log("CITY  INSIDE - " + cityIP);
+}
+
+
+
+
+
 
 /*---------- GET READY ------------------*/
 
 $(document).ready(function(){
-	
-	//Global variables
-	var cTemp = "";
-	var city = "";
-	var country = "";
-	var countryISO2 = "";
-	var dayType = "";
-	var winSpd = "";
-	var winDir = "";
-	var humid = "";
-	var sunRiseTime = "";
-	var sunSetTime = "";
-	
-	//URL variables 
-	var baseURL = "http://api.openweathermap.org/data/2.5/weather?q=";
-	var cityCTRY = city + ',' + countryISO2;
-	var unitMTR = "&units=metrics";
-	var callBACK = "&callback=WEATHER";
-	var apID = "&appid=49feecc2cd382186ed0d59d785a42457";
-	var finalURL = baseURL + cityCTRY + unitMTR + apID + callBACK;
-	
-	getLocation();
-	
-	getWeather();
-	
-	// Get City and Country data from IP address 
-  function getLocation() {	
-	
-		
-		$.get("https://ipinfo.io", function(response) {
 
-			// console.log(response.city, response.country);
-			city = response.city;
-			countryISO2 = response.country;
-
-		}, "jsonp")
-	}
-	
-	
-	
 	// Get weather data from OpenWeatherMap: https://openweathermap.org
 	function getWeather(){
-	
+
+		getLocation();
+
+		console.log("city in gtWthr() before finalURL - " + cityIP);
+	  finalURL = baseURL + 'Dubai' + unitMTR + apID + callBACK;
+		console.log("finalURL - " + finalURL);
+
 		$.ajax({
-		 finalURL,
+		 url: finalURL,
 		 data: {
 				format: 'json'
 		 },
-		 error: function() {
-				$('#info').html('<p>An error has occurred</p>');
+		 error: function(error) {
+				//$('#info').html('<p>An error has occurred</p>');
+				console.log("ERROR - " + error.message);
 		 },
 		 dataType: 'jsonp',
 		 success: function(data) {
+				console.log("SUCCESS");
 				console.log(data);
-				
+
 				// load returned weather data to respective variables
 				loadWData(data);
-				
+
 		 },
 		 type: 'GET'
 		});
 	}
-	
-	
+
+
 	// Load weather data for display
 	function loadWData (data) {
-	
+
 		cTemp = data.main.temp;
-		$('#temp').html(data.main.temp);
-		
-		city = "";
-		country = "";
-		countryISO2 = "";
-		$('#city').html(city + ', ' + countryISO2);
-		
+		console.log("Temp - " + cTemp);
+		$('#temp').text(cTemp);
+
+
+		//getLocation();
+		$('#city').text(cityIP + ', ' + countryISO2);
+
 		dayType = data.weather[0].main;
-		$('#datType').html(data.weather[0].main);
-		
+		$('#dayType').text(data.weather[0].main);
+
 		winSpd = data.wind.speed;
 		winDir = data.wind.deg;
-		$('#windSpeed').html(data.wind.speed + ' m/s');
-		$('#windDirection').add(data.wind.deg);
-		
+		$('#windSpeed').text(data.wind.speed + ' m/s');
+		//$('#windDirection').add(data.wind.deg);
+
 		humid = data.main.humidity;
-		$('#humidity').html(data.main.humidity);
-		
-		
+		$('#humidity').text(data.main.humidity);
+
+
 		sunRiseTime = getTime(data.sys.sunrise);
 		sunSetTime = getTime(data.sys.sunset);
-		$('#sunrise').html(sunRiseTime + ' AM');
-		$('#sunset').html(sunSetTime + ' PM');
+		$('#sunrise').text(sunRiseTime + ' AM');
+		$('#sunset').text(sunSetTime + ' PM');
 	}
-	
 
 
-	function getTime(unixtime) {
+
+	function getTime(unix_timestamp) {
 
 		// Create a new JavaScript Date object based on the timestamp
 		// multiplied by 1000 so that the argument is in milliseconds, not seconds.
@@ -123,7 +136,14 @@ $(document).ready(function(){
 		return formattedTime;
 	}
 
-	
+
+
+
+
+		getWeather();
+
+
+
 });
 
 
@@ -132,4 +152,3 @@ $(document).ready(function(){
 
 $.getJSON("http://country.io/names.json");
 */
-
