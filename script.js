@@ -31,31 +31,26 @@ var finalURL = "";
 // Get City and Country data from IP address
 function getLocation() {
 
+    $.getJSON('http://ipinfo.io/geo', function(response){
+      console.log(response.city, response)
 
-          $.get("https://ipinfo.io", function(response) {
+      cityIP = response.city;
 
-              console.log(response.city, response.country);
-              cityIP = response.city;
-              countryISO2 = response.country;
+      loc[0] = response.city;
+      console.log(loc[0]);
+    });
 
-          }, "jsonp");
-					console.log("CITY  INSIDE - " + response.city);
-					console.log("CITY  INSIDE - " + cityIP);
+		//console.log("CITY  INSIDE - " + response.city);
+		console.log("CITY  OUTSIDE - " + loc[0]);
 }
-
-
-
-
 
 
 /*---------- GET READY ------------------*/
 
 $(document).ready(function(){
 
-	// Get weather data from OpenWeatherMap: https://openweathermap.org
-	function getWeather(){
-
-		getLocation();
+	  // Get weather data from OpenWeatherMap: https://openweathermap.org
+    getLocation();
 
 		console.log("city in gtWthr() before finalURL - " + cityIP);
 	  finalURL = baseURL + 'Dubai' + unitMTR + apID + callBACK;
@@ -81,8 +76,6 @@ $(document).ready(function(){
 		 },
 		 type: 'GET'
 		});
-	}
-
 
 	// Load weather data for display
 	function loadWData (data) {
@@ -117,30 +110,28 @@ $(document).ready(function(){
 
 	function getTime(unix_timestamp) {
 
-		// Create a new JavaScript Date object based on the timestamp
-		// multiplied by 1000 so that the argument is in milliseconds, not seconds.
-		var date = new Date(unix_timestamp*1000);
+  		// Create a new JavaScript Date object based on the timestamp
+  		// multiplied by 1000 so that the argument is in milliseconds, not seconds.
+  		var date = new Date(unix_timestamp*1000);
 
-		// Hours part from the timestamp
-		var hours = date.getHours();
+  		// Hours part from the timestamp
+  		var hours = date.getHours();
 
-		// Minutes part from the timestamp
-		var minutes = "0" + date.getMinutes();
+  		// Minutes part from the timestamp
+  		var minutes = "0" + date.getMinutes();
 
-		// Seconds part from the timestamp
-		var seconds = "0" + date.getSeconds();
+  		// Seconds part from the timestamp
+  		var seconds = "0" + date.getSeconds();
 
-		// Will display time in 10:30  format
-		var formattedTime = hours + ':' + minutes.substr(-2);
+  		// Will display time in 10:30  format
+  		var formattedTime = hours + ':' + minutes.substr(-2);
 
-		return formattedTime;
-	}
-
-
+  		return formattedTime;
+	 }
 
 
 
-		getWeather();
+		getWData();
 
 
 
