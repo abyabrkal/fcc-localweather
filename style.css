@@ -67,7 +67,7 @@ table {
 
 
 body {
-	background: #1C2833;
+	background-image: linear-gradient(to top, #005bea 0%, #00c6fb 100%);
 	width: 99%;
 	height: 100vh;
 	font-family: 'Open Sans', sans-serif;
@@ -91,25 +91,45 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	
+
 	position: relative;
   top: 50%;
   transform: translateY(-50%);
   overflow: hidden;
 	margin: 0 auto;
-	
-	width: 80%;
-	height: 80%;
+
+	width: 70%;
+	height: 70%;
 	background-color:transparent;
-	box-shadow: 0px 0px 44px 2px rgba(100,100,100,0.45);
+	box-shadow: 0px 0px 44px 2px rgba(0, 0, 0, 0.45);
 	border-radius: 7px;
 	text-transform: uppercase;
 }
 
+#icon,
+.icn {
+	width: 100px;
+	height: 100px;
+}
+
 .wTemp {
+
+	display: flex;
+	flex-direction: row;
+}
+
+#temp {
 	font-size: 8em;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
+}
+
+#degree{
+	font-size: 4em;
+}
+
+#metric {
+	font-size: 2em;
 }
 
 /*********** TOGGLE SWITCH *************/
@@ -134,7 +154,7 @@ input.round + label {
 	height: 30px;
 	background-color: #dddddd;
 	border-radius: 30px;
-} 
+}
 
 input.round + label:before,
 input.round + label:after {
@@ -195,6 +215,7 @@ span {
 .windSpeed {
 	display: inline-block;
 	margin-right: 30px;
+	text-transform: lowercase;
 }
 
 .humidity {
@@ -203,12 +224,20 @@ span {
 
 .sunTime {
 	display: block;
+
 }
 
 .sunRise {
 	display: inline-block;
 	margin-right: 30px;
+	text-transform: lowercase;
 }
 .sunSet {
 	display:inline-block;
+	text-transform: lowercase;
+}
+
+.foot {
+	display: fixed;
+	bottom: 0;
 }

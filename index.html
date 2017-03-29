@@ -14,31 +14,36 @@
   </head>
   <body>
     <div class="weatherbox">
-      <h1 id="temp" class="wTemp margBtmS"></h1>
+      <div id="icon"></div>
+      <div class="wTemp margBtmS">
+          <h1 id="temp"></h1>
+          <span id="degree">&#176;</span><span id="metric">C</span>
+      </div>
+
       <div class="switch margBtmL">
-        <input id="toggler" class="toggle round" type="checkbox">
+        <input id="toggler" class="toggle round" type="checkbox" onclick="changeTemp">
         <label for="toggler"></label>
       </div>
       <h4 id="dayType" class="wDay margBtmL"></h4>
       <h3 id="city" class="wCity margBtmXL"></h3>
       <div class="secondaryData margBtmL">
         <div class="row1 margBtmL">
-          <p class="windSpeed">Wind Speed
+          <p class="windSpeed">
+            <img src="https://maxcdn.icons8.com/Color/PNG/24/Transport/windsock-24.png" title="Windsock" width="48">
             <span id="windSpeed"></span>
-            <i id="windDirection"></i>
           </p>
-          <p class="humidity">Humidity
+          <p class="humidity">
+            <img class="icon icons8-Dew-Point" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAC10lEQVRoQ+2ZvW7aUBTH/weyQGU1j2AkhnRq/QQlM6r6MVdq2rCEDCFPUPoEIQNkoW2eoAK1DJ0Ce1VolzIg4QfogGQVloRbUeG2OLbvB76xkeLV9557fufcc+7f14QNf2jD/cctQNwZlMpA/8fYBF2dAHiwdHwAlj627uXsuECEAZbO9wFse5ydgKWtuCDEAYajFoDHAZFuWzv5J3FkQRjg63A0IeBugJO2tZPPJRqgPxyxMAetnbxwMHigexdsOz2dnlxls8fnuzQJGy+86E0C7HemNQKOGHD6tpitaAHoffm+Yrfy/JlwMMIcKn2cFZBiF3/HzGm3+SjTDZojvKg3A7oA9j/9GhDR/X8Os0GzeMeKHMBrMIoaeNWZ7aXA3nttz0Ev3xUz534QyhnQAXA9+u4qwVlQBtCxhUqdaWCnaxazvr4mDWBRrA99tkqvWcwWEr+FrnUg1+OQTqScAR01sLC5hKguM9HDnKqRtNFcw1nZnz/bH1YYnM8vhIPBO4ll3gsvGiWAjFTgwSgDeA2Py4awLRmpkDgAWamgDUC1BmSlQqIAVKSCNgCVGlCRCokCUJEK2gBUaqDUmUpLhWQBeD9WBKSCNgCVGlCRCpEAmHWnSoTXYcYYoWofGG94C0b9nnt6mnWnRRR4H7TiDwNadtl4uq6TMlIjFMCsOzUiHMk4xBhO7UMj9CaBZ09GagQCmGczk9jlmLeY33tGWzn7IKN0XyorNYIBFKLvwqyTBVmpEQzQcLrk/3nHTQoDenbZ8P0EDJusIjUCAbz6n+u1Z4CMvHanqkiNRAGoSI2wLTQg4L8bMvEcMOCbXTbcnyDCE1WkRqKKONJbiZjbaDS3EnEdZMJ7DuD/ZjUbjnAtMIa2fWjc6K8mrhZaREMkE+scXjIR944VAvgDcTYzMb+sgFBwu9Oi24Chi9RWTVU6rOP8Yq4wwLoL6Zp/C6ArsqJ2Nz4DvwFTYbFALb5ZuAAAAABJRU5ErkJggg==" width="48" height="48">
             <span id="humidity"></span>
-            <i></i>
           </p>
         </div>
         <div class="row2 margBtmL">
           <p class="sunRise">
-            <i></i>SunRise
+            <img class="icon icons8-Sunrise" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACaklEQVRoQ+2YQWsTURDH/2OthTYJwULBgGULLagUCdiLFJTiqSctfgDrLSQnL34IL54SvTVfQMzNkxQE8WKhirRCC10UIhQqoQmCjfXJa7Kx2ezue82+2ZCye8zOzvv/5j+8GUIY8oeGXD9igEE7GDtwrh2wio1VCWgXEmUuULYWskqHDwj0WgoXECt2PlXhgGABsIqNLPB3nYjSJwBC1IALS3YhsWkawjiA9Vykcam+54h3BJ9AHCVn7CdUMwlhFKAlvrFOhKyXSCGwiaPEkkkIswDFeoUI94MqLICKnU+umHLBGIBVOiwT6JGOMCFE2S6kHuvEqmKMAbgPminVxenf9vJJlrNYkkrhMYCqd9rvYwf8CjX0LaTZAaHD2FootDLNBKwA4gVWQbhLORi5872Y2ADa4tfah5a5IFgAXOKdwrFAGAfwEc8GYRRAIZ4F4kwA4iW69hvNi+LMYZTT/7snBugq7+gIkJkEMpeB8TEgnWi9rjWAX7+B6k+gegA0jwNdid4BKXw2A8xlgNGLwS3T/APsVIHdqi9ItABS/J35/9XW7XjpyrsvnhDRAUjxywvqqvtBSTfefOyBiAag38q7YTyciAbgxlXg+rRuwwTHbX8Dtr53YlgAuoZU2NZx4/S2kvbaoTUHeiasNQXcmjNTfSfLxg5g75/OqQWhBPBcD25fa933Jh85Hz58dWdUQgQC+O4297JAesKk/Nawe/vJK2cghC9A4GL2cNGseCfbq/d+eX0hugCuPP0cybIWlv7Hs5sd3TFA2Gr28/35daCfagz6G+UcGLRA1fkxgKpC3O9jB7grrMr/D2e21zGafRltAAAAAElFTkSuQmCC" width="48" height="48">
             <span id="sunrise"></span>
           </p>
           <p class="sunSet margBtm">
-            <i></i>SunSet
+            <img class="icon icons8-Sunset" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACdElEQVRoQ+2XwWsTQRTGv6eWgCZtsCAYUFawYEuphXoRwRY8ebLiH2B7K8nJi39ELz017a3pHyCtJ09CEcSLgi2iQgUXhQiC0jahEKo+maRpu8nuzuxmZkPK5BSYt2++3/e97EwIPf6hHtcPC9DtBG0CpzaBa8UKn4T7ms8YSdtIUyHcAijOpk0gyKieGyGnuFci0GOV5Bm86ub7Z1RqZTVaR8hZrKwT4UHYpsx47hYy0zJhqut6ARY4i1R1g4CbfgIY2EQtPeU+oR1VgbI6rQBiM2eBs5SquAANeDfnXa5lHJ3iRX/tAHWIxeo40b+NYwjeZT4z5RbS72WORl03AlCHKO5NE2hNfGfwQzffvx5VnEq9MYDDJOpvGreQLqmIiVNjFCCOoKjPWIDQd/4SZkCYpDnMRnVWtd5YAtwQv3IopGQKwghAi/immUYgtAMEiDcGoRVAIt4IRCQAXobnb6LqDy1qHc2p3xAsgMfdvrNAbhDIXQTOp4BsurG8UwX2a0D5N1D+BRz8DQ0l+QSE8Os5YCgH9J0Ln5iDP8B2GfhSDgRJFkCIvzt67LbqwItUXn3whUgOQIi/f0vuehCUSOPF2zaIZADiOt8K45NEMgAjV4Dhq6oDE1736Rvw8ftRjREAzyHV6ei04rSPkvK1Q+kcaDthnUvAxJAe95td3m0D7s+TPZUgpAC+14PbNxrve50fcT68+dzaUQoRChB4t7k3DmQv6JTfOOxebvr1DIUIBAi9mD26o1d8s9uz10F9AyE8AJefbiVyWeuU/sf82JFuC9Cpm3GeP70JxHGj289Iz4FuC5TtbwFkDpletwmYdljW/z/xndUxiRHOSwAAAABJRU5ErkJggg==" width="48" height="48">
             <span id="sunset"></span>
           </p>
         </div>
@@ -47,5 +52,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <a class="foot" href="https://icons8.com">Icon pack by Icons8</a>
   </body>
 </html>
