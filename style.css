@@ -137,6 +137,7 @@ h2 {
 #front,
 #back {
 	position: relative;
+  	display: block;
 }
 	
 
@@ -147,8 +148,8 @@ h2 {
 	font-family: 'Oxygen';
 	position: absolute;
 	color: rgba(240, 240, 240, 0.6);
-	left: -20px;
-	bottom: -30px;
+	left: -30px;
+	bottom: -190px;
 }
 
 #degreeC,
@@ -157,8 +158,8 @@ h2 {
 	text-decoration: none;
 	color: rgba(240, 240, 240, 0.75);
 	position: absolute;
-	right: 5px;
-	top: 5px;
+	right: 0px;
+	top: -90px;
 }
 
 
