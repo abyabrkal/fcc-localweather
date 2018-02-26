@@ -1,60 +1,4 @@
-/*******************************************
---------  ERIC MEYERS RESET CODE   --------
-********************************************
- http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-********************************************/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-    text-decoration: none;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-/** ************** *************** ***  ***
-*****   END OF MEYERS RESET CODE *** ****
-************ ********  *****  ***********/
-
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Libre+Baskerville|Poppins:300,400,500|Oxygen:700');
 
 
 *,
@@ -67,177 +11,225 @@ table {
 
 
 body {
-	background-image: linear-gradient(to top, #005bea 0%, #00c6fb 100%);
+	background-color: aliceblue;
 	width: 99%;
-	height: 100vh;
-	font-family: 'Open Sans', sans-serif;
-	color: white;
+	min-height: 100%;
+	font-family: 'Poppins', 'Open Sans', sans-serif;
+	color: cornflowerblue;
 }
 
-.margBtmXL {
-	margin-bottom: 50px;
+
+#nav{
+	margin: 20px 10px;
 }
 
-.margBtmL {
-	margin-bottom: 35px;
+#today{
+	margin-top: 40px;
+	margin-bottom: 15px;
+	text-align: center;
 }
 
-.margBtmS {
-	margin-bottom: 20px;
-}
-
-.weatherbox {
-  display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
-	position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  overflow: hidden;
-	margin: 0 auto;
-
-	width: 70%;
-	height: 70%;
-	background-color:transparent;
-	box-shadow: 0px 0px 44px 2px rgba(0, 0, 0, 0.45);
-	border-radius: 7px;
-	text-transform: uppercase;
-}
-
-#icon,
-.icn {
-	width: 100px;
-	height: 100px;
-}
-
-.wTemp {
-
-	display: flex;
-	flex-direction: row;
-}
-
-#temp {
-	font-size: 8em;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-}
-
-#degree{
-	font-size: 4em;
-}
-
-#metric {
-	font-size: 2em;
-}
-
-/*********** TOGGLE SWITCH *************/
-
-.toggle {
-	position: absolute;
-	margin-left: -9999px;
-	visibility: hidden;
-}
-
-.toggle + label {
-	display: block;
-	position: relative;
-	cursor: pointer;
-	outline: none;
-	user-select: none;
-}
-
-input.round + label {
-	padding: 2px;
-	width: 60px;
-	height: 30px;
-	background-color: #dddddd;
-	border-radius: 30px;
-}
-
-input.round + label:before,
-input.round + label:after {
-	display: block;
-	position: absolute;
-	top: 1px;
-	left: 1px;
-	bottom: 1px;
-	content: "";
-}
-
-input.round + label:before {
-  right: 1px;
-  background-color: #1ABC9C;
-  border-radius: 30px;
-  transition: background 0.4s;
-}
-
-input.round + label:after {
-  width: 29px;
-  background-color: #fff;
-  border-radius: 100%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: margin 0.4s;
-}
-
-input.round:checked + label:before {
-  background-color: #3498DB;
-}
-
-input.round:checked + label:after {
-  margin-left: 30px;
-}
-
-/******** END OF TOGGLE SWITCH **********/
-
-.wDay {
-	font-size: 1em;
-	font-weight: 700;
-}
-
-.wCity {
-	font-size: 1.7em;
-	font-weight: 200;
-}
-
-.secondaryData {
-	font-size: 1em;
-	font-weight: 400;
-}
-
-span {
-	font-weight: 700;
-	margin-right: 10px;
+#country {
+	margin: 5px auto;
+	text-align: center;
+	font-family: 'Libre Baskerville';
 	font-size: 1.5em;
+	background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.windSpeed {
-	display: inline-block;
-	margin-right: 30px;
-	text-transform: lowercase;
+#country.hover{
+	background-image: linear-gradient(to left, #6a11cb 0%, #2575fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.humidity {
-	display: inline-block;
+.greet {
+	font-size: 3.5em;
+	margin: 50px auto;
+	text-align: center;
 }
 
-.sunTime {
-	display: block;
 
+h2 {
+	font-size: 2em;
+	margin: 40px auto;
+	text-align: center;
 }
 
-.sunRise {
-	display: inline-block;
-	margin-right: 30px;
-	text-transform: lowercase;
-}
-.sunSet {
-	display:inline-block;
-	text-transform: lowercase;
+#conditionText {
+	font-size: 1em;
+	transition: all 0.5s ease-in-out;
+	cursor: pointer;
 }
 
-.foot {
-	display: fixed;
+#conditionText.hover {
+	color: #1ABC9C;
+	font-size: 1.2em;
+}
+
+
+#icon {
+	width: 70px;
+	height: 70px;
+	margin: 10px auto;
+}
+
+
+/****************************************************
+                    THE CARD
+
+******************************************************/
+
+.card-wrapper {
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+	position: relative;
+	border-radius: 7px;
+  perspective: 800px;
+	overflow: hidden;
+}
+
+
+.card {
+  width: 100%;
+	height: 100%;	
+	position: absolute;
+  transition: transform .5s;
+  transform-style: preserve-3d;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 
+		          0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 7px;
+	cursor: pointer;
+	
+}
+
+.card:hover {
+	
+}
+
+.card div {
+  width: 100%;
+	height: 100%;
+	position: absolute;
+  top: 0;
+  left: 0;
+	border-radius: 7px;
+	transform-style: preserve-3d;  
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	
+}
+
+.card .back {
+  transform: rotateY(180deg);
+}
+
+
+.card.flipped {
+	transform: rotateY(180deg);
+}
+
+
+/********************END OF THE CARD **************/
+
+
+#tempC,
+#tempF {
+	font-size: 13em;
+	font-family: 'Oxygen';
+	position: absolute;
+	color: rgba(240, 240, 240, 0.6);
+	left: -20px;
+	bottom: -30px;
+}
+
+#degreeC,
+#degreeF {
+	font-size: 4em;
+	text-decoration: none;
+	color: rgba(240, 240, 240, 0.75);
+	position: absolute;
+	right: 5px;
+	top: 5px;
+}
+
+
+
+.color_animate {  
+	 color: #f35626;
+   background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+	 -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   -webkit-animation: hue 60s infinite linear;
+}
+
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+.color_animate_neg {
+  
+	 color: #f35626;
+   background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+   -webkit-animation: hue-neg 60s infinite linear;
+}
+
+
+@-webkit-keyframes hue-neg {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(360deg);
+  }
+}
+
+footer{
+	margin-top: 10px;
+	position: absolute;
 	bottom: 0;
+	height: 40px;
+	width: 100%;
+	text-align: center;
+	
 }
+
+.me {
+	margin: 5px auto;
+	font-size: 1.25em;
+	color: TEAL;
+}
+
+.inspire {
+	margin: 10px auto;	
+	color: SLATEGRAY;
+}
+
+.thanks {
+	text-decoration: none;
+	color: #2E4053;
+}
+
+
+.thanks:visited {
+	color: #2E4053;
+}
+
+.thanks:hover {
+	color: #E74C3C;
+}
+
+
+
+
+

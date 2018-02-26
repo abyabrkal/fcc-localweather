@@ -6,7 +6,7 @@ LocalWeather - Free Code Camp FRONTEND Project#4
 https://www.freecodecamp.com/abyabrkal
 
 
-### STATUS: [PENDING]
+### STATUS: [Completed]
 *23 Mar 2017*
  - Cross Origin issue in JS
  - City missing
@@ -15,3 +15,6 @@ https://www.freecodecamp.com/abyabrkal
  *29 Mar 2017*
   + Add code for C/F toggle
   + Code beautification
+  	
+ *Jun 18, 2017*
+  + Total redesign of layout

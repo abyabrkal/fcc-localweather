@@ -1,160 +1,208 @@
-    /*document.addEventListener('DOMContentLoaded', function() {
-        alert("Ready!");
-    }, false);*/
 
+//Global variables for weather programming
+var gCity = "";
+var gCord = "";
+var weatherDb = {};
+var isC = "true";
 
-    //Global variables
-    var cTemp = "";
-    var city = "";
-    var country = "";
-    var countryISO2 = "";
-    var dayType = "";
-    var winSpd = "";
-    var winDir = "";
-    var humid = "";
-    var sunRiseTime = "";
-    var sunSetTime = "";
-    var meridian = "am";
+//HTML Nodes
+var tempL = "";
+var iconL = "";
+var conditionTextL = "";
+var humidityL = "";
+var unitL = "";
+var dateL ="";
 
+ 
 
+// FUNCTION DEFINITIONS ---***************-----
 
-
-
-
-
-    // Get City and Country data from IP address
-    function getLocation() {
-
-        $.getJSON('http://ipinfo.io/geo', function(response){
-          console.log(response.city, response)
-
-          city = response.city;
-          $('#city').text(response.city);
-
-          getWeather(response.city);
-
-        });
-
-    		//console.log("CITY  INSIDE - " + response.city);
-    	console.log("CITY  OUTSIDE - " + city);
-    }
-
-
-
-    function getTime(unix_timestamp) {
-
-        // Create a new JavaScript Date object based on the timestamp
-        // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-        var date = new Date(unix_timestamp * 1000);
-
-        // Hours part from the timestamp
-        var hours = date.getHours();
-        meridian = " am";
-
-
-        if (hours > 12) {
-            hours = hours - 12;
-            meridian = " pm";
-        }
-
-        // Minutes part from the timestamp
-        var minutes = "0" + date.getMinutes();
-
-        // Seconds part from the timestamp
-        var seconds = "0" + date.getSeconds();
-
-        // Will display time in 10:30  format
-        var formattedTime = hours + ':' + minutes.substr(-2);
-
-        return formattedTime;
-     }
-
-
-
-    // Get weather data from OpenWeatherMap: https://openweathermap.org
-    function getWeather(myCity){
-
-        //URL variables
-        var baseURL = "http://api.openweathermap.org/data/2.5/weather?q=";
-        var unitMTR = "&units=metric";
-        var callBACK = "&callback=?";
-        var apID = "&appid=49feecc2cd382186ed0d59d785a42457";
-
-        var finalURL = baseURL + myCity + unitMTR + apID + callBACK;
-
-
-        $.ajax({
-             url: finalURL,
-             data: {
-                    format: 'json'
-             },
-             error: function(error) {
-                    //$('#info').html('<p>An error has occurred</p>');
-                    console.log("ERROR - " + error.message);
-             },
-             dataType: 'jsonp',
-             success: function(data) {
-                    console.log("SUCCESS");
-                    console.log(data);
-
-                    // load returned weather data to respective variables
-                    parseWeather(data);
-
-             },
-             type: 'GET'
-        });
-
-    }
-
-
-	// Load weather data for display
-	function parseWeather(data) {
-
-		cTemp = Math.round(data.main.temp);
-		$('#temp').text(cTemp);
-
-		dayType = data.weather[0].main;
-		$('#dayType').text(data.weather[0].main);
-
-        //ICON
-        var icon = ("<img class=\"icn\" src='http://openweathermap.org/img/w/" + data.weather[0].icon + ".png'>");
-        $('#icon').html(icon);
-
-		winSpd = data.wind.speed;
-		//winDir = data.wind.deg;
-		$('#windSpeed').text(data.wind.speed + ' m/s');
-		//$('#windDirection').add(data.wind.deg);
-
-		humid = data.main.humidity;
-		$('#humidity').text(data.main.humidity);
-
-		sunRiseTime = getTime(data.sys.sunrise);
-        $('#sunrise').text(sunRiseTime + meridian);
-		sunSetTime = getTime(data.sys.sunset);
-		$('#sunset').text(sunSetTime + meridian);
+// Get Date and Greeting
+function whatTime() {
+	
+  // Get Today's Date for Nav display
+  var date = new Date();
+	
+	document.getElementById('today').innerHTML = date.toDateString();
+	
+	
+	// Lets get Greeting
+	var greets = "Good Morning";
+	
+  // Hours part from the timestamp
+  var hours = date.getHours();
+	
+	
+	if (hours > 12 && hours < 17) {
+    greets = "Good Afternoon";
+  }
+	else if (hours >= 17 && hours < 24){
+		greets = "Good Evening";
+	}
+	else {
+		greets = "Good Morning";
 	}
 
-    function changeTemp(){
-        var fH = ((cTemp * 9)/5) + 32;
-        document.getElementById("temp").innerHTML = fH;
-        document.getElementById("metric").innerHTML = F;
-    }
+	
+	document.getElementById("greeting").innerHTML = greets;
+  	
+}
+
+function parseWeather(weatherDb){
+	
+		
+	// LOCATION DATA with COUNTRY
+	var location = weatherDb.city + ', ' + weatherDb.country;
+	document.getElementById('country').innerHTML = location;
+	
+	
+	// WEATHER CONDITION
+	document.getElementById('conditionText').innerHTML = weatherDb.conditionText;
+	
+	//ICON SETUP
+	var icon = ("<img class=\"icon\" src='" + weatherDb.icon + "'>");
+  document.getElementById('icon').innerHTML = icon;
+	
+	//TEMPERATURE VALUE - CELSIUS
+	document.getElementById('tempC').innerHTML = weatherDb.tempC;
+	
+	//TEMPERATURE UNIT - FAHRENHEIT
+	document.getElementById('tempF').innerHTML = weatherDb.tempF;
+
+}
 
 
 
-    /*---------- GET READY ------------------*/
+/* GET WEATHER from API without jQuery */ 
+function getWeather(city) {
+	
+	
+	var finalURL = "https://api.apixu.com/v1/current.json?key=7db709020c694a158aa64848170206&q=" + city;
+	
+	
+	var request = new XMLHttpRequest();
+	request.open('GET', finalURL, true);
 
-    $(document).ready(function(){
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			// Success!
+			var wData = JSON.parse(request.responseText);
+			//console.log(wData);
+			
+			// Store retrieved data in weatherDb global
+			weatherDb.tempC = Math.round(wData.current.temp_c);
+			weatherDb.tempF = Math.round(wData.current.temp_f);
+			weatherDb.city = wData.location.name;
+			weatherDb.country = wData.location.country;
+			weatherDb.isDay = wData.current.is_day;
+			weatherDb.conditionText = wData.current.condition.text;
+			weatherDb.icon = wData.current.condition.icon;
+			weatherDb.conditionCode = wData.current.condition.code;
+			weatherDb.humidity = wData.humidity;
+			
+			//console.log(weatherDb);
+			
+			// Load the data to HTML structure
+			parseWeather(weatherDb);
+			
+		} else {
+			// We reached our target server, but it returned an error
+			console.log("Reached our target server: But, fell down");
 
-        getLocation();
+		}
+	};
 
-    });
+	request.onerror = function() {
+		// There was a connection error of some sort
+		console.log("Connection Error, man!");
+	};
+
+	request.send();
+ 
+}
 
 
 
+// SET THE CITY TO A GLOBAL VARIABLE 
+function setCity(city) {
+	
+	gCity = city;
+	console.log("SETFUNC - " + gCity);
+}
 
 
-/*
 
-$.getJSON("http://country.io/names.json");
-*/
+/* GET LOCATION from IP */ 
+function getLocation() {
+	
+	var request = new XMLHttpRequest();
+	request.open('GET', 'https://ipinfo.io/geo', true);
+	//request.open('GET', 'https://ipinfo.io/json', true);
+
+	console.log("LOCATION REQUEST" + request.status); 
+	
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			// Success!
+			var data = JSON.parse(request.responseText);
+			console.log(data.city, data.loc);
+			
+			setCity(data.city, data.loc);
+			getWeather(data.city);
+			
+		} else {
+			// We reached our target server, but it returned an error
+			console.log("Reached our target server: But, Error");
+
+		}
+	};
+
+	request.onerror = function() {
+		// There was a connection error of some sort
+		console.log("Connection Error, man!");
+	};
+
+	request.send();
+			
+}	
+	
+
+// GET HTML ELEMENT NODES
+window.onload = function () {
+	
+	tempL = document.getElementById("temperature");
+  iconL = document.getElementById("icon");
+  humidityL = document.getElementById("humidity");
+	locL = document.getElementById("location");
+  unitL = document.getElementById("unit");
+	
+
+	
+	
+	getLocation();
+	whatTime();
+	
+	getWeather();
+	
+	$('.card-wrapper').on('click', function () {
+		$('.card').toggleClass('flipped');
+		$('.card').removeClass('hover');
+
+		// Set Celsius / Fahrenheit values
+		isC = !isC;
+
+		if(isC) {
+			 document.getElementById('tempC').innerHTML = weatherDb.tempC;
+		} else {
+			 document.getElementById('unit').innerHTML = "F";
+			 document.getElementById('tempF').innerHTML = weatherDb.tempF;
+		} 
+		 
+	});
+
+
+	
+	
+}
+
+
