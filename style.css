@@ -134,6 +134,12 @@ h2 {
 
 /********************END OF THE CARD **************/
 
+#front,
+#back {
+	position: relative;
+}
+	
+
 
 #tempC,
 #tempF {
